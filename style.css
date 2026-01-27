@@ -1,0 +1,552 @@
+/* ==============================
+   Шрифты
+============================== */
+@font-face {
+    font-family: 'kom-post';
+    src: url('fonts/kom-post.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+/* ==============================
+   Общие стили страницы
+============================== */
+body {
+    margin: 0;
+    padding: 40px;
+    background: #fffbf2;
+    font-family: 'kom-post', cursive, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.invitation {
+    position: relative;
+    min-height: 100svh;
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==============================
+   Заголовки и имена пары
+============================== */
+h1 {
+    font-size: clamp(2rem, 5vw, 5.5rem);
+    color: #535353;
+    margin: 0 0 30px;
+    letter-spacing: 0.1em;
+}
+
+/* ==============================
+   Блок couple с анимацией
+============================== */
+.couple {
+    font-size: clamp(7rem, 13vw, 13rem);
+    color: #AEA434;
+    line-height: 1.2;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.name-left,
+.name-right {
+    display: block;
+    opacity: 0;
+    position: relative;
+}
+
+.name-left {
+    text-align: left;
+    animation: slideLeft 1s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+.name-right {
+    text-align: right;
+    animation: slideRight 1s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+@keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-150px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(150px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.invite {
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    color: #535353;
+    margin: 0 0 50px;
+    line-height: 1.6;
+}
+
+.date {
+    font-size: clamp(3rem, 8vw, 9rem);
+    color: #E26728;
+    letter-spacing: 0.05em;
+}
+
+.countdown {
+    font-family: 'kom-post', cursive;
+    text-align: center;
+    margin: 40px 0;
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    color: #E26728;
+}
+
+.countdown .time {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.countdown .time span {
+    font-weight: bold;
+    font-size: clamp(2rem, 4vw, 5rem);
+}
+
+/* ==============================
+   Анимация появления при скролле
+============================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Когда элемент стал видимым */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==============================
+   Scroll hint (стрелка скролла)
+============================== */
+.scroll-hint {
+    position: fixed;
+    /* вместо absolute */
+    bottom: 20px;
+    /* отступ от низа окна */
+    left: 50%;
+    /* по центру */
+    transform: translateX(-50%);
+    z-index: 1000;
+    /* чтобы была поверх всего */
+    pointer-events: none;
+    /* чтобы клики проходили */
+}
+
+.scroll-hint .arrow {
+    display: block;
+    font-family: 'kom-post', cursive;
+    font-size: 5rem;
+    color: #535353;
+    transform: rotate(90deg);
+    animation: arrowMove 2s infinite ease-in-out;
+}
+
+@keyframes arrowMove {
+    0% {
+        transform: rotate(90deg) translateX(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: rotate(90deg) translateX(12px);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: rotate(90deg) translateX(0);
+        opacity: 0.4;
+    }
+}
+
+/* ==============================
+   Изображения / декор
+============================== */
+.hearts,
+.dance,
+.stars,
+.cherries,
+.angels,
+.final-img,
+.wishes-img {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    display: block;
+}
+
+/* ==============================
+   Локация
+============================== */
+.location {
+    padding: 80px 20px;
+    background: #fffbf2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.location-text {
+    font-size: clamp(2rem, 5vw, 9.5rem);
+    color: #535353;
+    line-height: 1.5;
+    margin: 0 0 30px;
+}
+
+.place {
+    font-size: clamp(2rem, 4vw, 9.5rem);
+    color: #AEA434;
+    margin: 0 0 30px;
+    letter-spacing: 0.1em;
+}
+
+.address {
+    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    color: #535353;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==============================
+   Расписание
+============================== */
+.schedule {
+    padding: 80px 20px;
+    background: #fffbf2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.schedule-title {
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    color: #535353;
+    margin: 0 0 40px;
+}
+
+.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline li {
+    margin-bottom: 28px;
+}
+
+.time,
+.event {
+    display: block;
+    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    color: #535353;
+}
+
+.timeline .highlight .time,
+.timeline .highlight .event {
+    color: #8EC1F4;
+}
+
+/* ==============================
+   Дресс-код
+============================== */
+.dresscode {
+    padding: 80px 20px;
+    background: #fffbf2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.dress-title {
+    font-size: clamp(2rem, 4vw, 9.5rem);
+    color: #F69593;
+    margin: 0 0 30px;
+    letter-spacing: 0.15em;
+}
+
+.dress-text {
+    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    color: #535353;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==============================
+   Примеры образов
+============================== */
+.examples {
+    padding: 80px 20px;
+    background: #fffbf2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.examples-text {
+    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    color: #535353;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==============================
+   Looks / заметки
+============================== */
+.looks {
+    padding: 80px 20px;
+    background: #fffbf2;
+    text-align: center;
+}
+
+.looks-title {
+    font-size: clamp(2rem, 4vw, 6.5rem);
+    color: #535353;
+    margin: 40px 0 30px;
+}
+
+.note {
+    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    color: #535353;
+    line-height: 1.6;
+    margin: 40px auto 0;
+    max-width: 700px;
+}
+
+/* ==============================
+   Слайдер
+============================== */
+.slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.slides {
+    width: 100%;
+    max-width: 420px;
+    overflow: hidden;
+}
+
+.slides img {
+    width: 100%;
+    height: auto;
+    display: none;
+}
+
+.slides img.active {
+    display: block;
+}
+
+.arrow {
+    background: none;
+    border: none;
+    font-family: 'kom-post', cursive;
+    font-size: clamp(2.5rem, 4vw, 8rem);
+    line-height: 1;
+    color: #535353;
+    cursor: pointer;
+    padding: 0 10px;
+    transform: translateY(-10px);
+}
+
+.arrow:hover {
+    opacity: 0.6;
+}
+
+/* ==============================
+   Пожелания
+============================== */
+.wishes {
+    padding: 80px 20px;
+    background: #fffbf2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.wishes-title {
+    font-size: clamp(2rem, 4vw, 9.5rem);
+    color: #D9ADD1;
+    margin: 0 0 50px;
+    letter-spacing: 0.1em;
+}
+
+.wishes-text {
+    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    color: #535353;
+    line-height: 1.6;
+    margin: 0 0 40px;
+    max-width: 800px;
+}
+
+/* ==============================
+   Финальный блок
+============================== */
+.final {
+    padding: 80px 20px 40px;
+    background: #fffbf2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.final-title {
+    font-size: clamp(2rem, 4vw, 9.5rem);
+    color: #535353;
+    margin: 0 0 40px;
+    line-height: 1.3;
+}
+
+.final-text,
+.final-accent {
+    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    line-height: 1.6;
+    margin: 0 0 40px;
+}
+
+.final-accent {
+    color: #E26728;
+}
+
+.final-links {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    font-weight: bold;
+}
+
+.final-link {
+    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    color: #E26728;
+    text-decoration: none;
+}
+
+.final-link:hover {
+    opacity: 0.6;
+}
+
+/* ==============================
+   Медиа-запросы для экранов <=768px
+============================== */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    /* Общие блоки */
+    .location,
+    .schedule,
+    .dresscode,
+    .examples,
+    .looks,
+    .wishes,
+    .final {
+        min-height: auto;
+        padding: 40px 15px;
+        margin-bottom: 50px;
+    }
+
+    /* Слайды */
+    .slides {
+        max-width: 280px;
+    }
+
+    /* Финальные ссылки вертикально */
+    .final-links {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    /* Отступы между элементами */
+    .invite,
+    .date,
+    .couple,
+    .schedule-title,
+    .dress-title,
+    .looks-title,
+    .wishes-title,
+    .final-title {
+        margin-bottom: 5px;
+    }
+
+    .time,
+    .event,
+    .address,
+    .dress-text,
+    .examples-text,
+    .note,
+    .wishes-text,
+    .final-text,
+    .final-accent {
+        margin-bottom: 5px;
+    }
+
+    /* Изображения */
+    .hearts,
+    .dance,
+    .stars,
+    .cherries,
+    .angels,
+    .final-img,
+    .wishes-img {
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+}
