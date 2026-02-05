@@ -43,7 +43,7 @@
                 <span class="arrow">&gt;</span>
             </div>
         </section>
-        <section class="location reveal">
+        <section class="section location reveal">
             <img src="images/2.png" alt="Танцующие жених и невеста" class="dance">
 
             <p class="location-text">
@@ -60,7 +60,7 @@
                 жилино-1, 9
             </p>
         </section>
-        <section class="schedule reveal">
+        <section class="section schedule reveal">
             <img src="images/3.png" alt="Пара под звездами" class="stars">
 
             <p class="schedule-title">программа нашего дня:</p>
@@ -89,7 +89,7 @@
             </ul>
         </section>
 
-        <section class="dresscode reveal">
+        <section class="section dresscode reveal">
             <img src="images/4.png" alt="Вишенки целуются" class="cherries">
 
             <p class="dress-title">дресс-код</p>
@@ -100,7 +100,7 @@
                 нашего дня:
             </p>
         </section>
-        <section class="examples reveal">
+        <section class="section examples reveal">
             <img src="images/5.png" alt="Ангелочки с вишенками" class="angels">
 
             <p class="examples-text">
@@ -113,9 +113,11 @@
         </section>
 
         <!-- Блок для девушек: платья -->
-        <section class="palette">
+        <section class="section palette">
             <div class="palette__window">
-                <div class="palette__image" style="background-image: url('./images/dress/panorama1.png');"></div>
+                <div class="palette__image">
+      <img src="./images/dress/panorama1.png" alt="">
+    </div>
             </div>
         </section>
         <p class="note">
@@ -123,9 +125,11 @@
             проходить на природе —<br>
             выбирайте комфортную обувь
         </p>
-        <section class="palette">
+        <section class="section palette">
             <div class="palette__window">
-                <div class="palette__image" style="background-image: url('./images/dress/panorama3.png');"></div>
+                <div class="palette__image">
+      <img src="./images/dress/panorama3.png" alt="">
+    </div>
             </div>
         </section>
         <section class="man">
@@ -135,13 +139,15 @@
         </section>
 
         <!-- Блок для мужчин -->
-        <section class="palette">
+        <section class="section palette">
             <div class="palette__window">
-                <div class="palette__image" style="background-image: url('./images/dress/panorama2.png');"></div>
+                <div class="palette__image">
+      <img src="./images/dress/panorama2.png" alt="">
+    </div>
             </div>
         </section>
 
-        <section class="wishes reveal">
+        <section class="section wishes reveal">
             <h2 class="wishes-title">
                 пожелания и<br>
                 особенности
@@ -174,7 +180,7 @@
                 нашего будущего
             </p>
         </section>
-        <section class="final reveal">
+        <section class="section final reveal">
             <h2 class="final-title">
                 мы будем<br>
                 счастливы провести<br>
@@ -201,7 +207,9 @@
     <script src="countdown.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
+document.querySelectorAll('.palette__window').forEach(p => {
+    p.scrollLeft = (p.scrollWidth - p.clientWidth) / 2;
+});
     // === Слайдеры ===
     document.querySelectorAll('.slider').forEach(slider => {
         const slides = slider.querySelectorAll('.slides img');
@@ -267,6 +275,49 @@
 
     window.addEventListener('scroll', updateScrollHint);
     updateScrollHint();
+            // === Drag-scroll для галерей (desktop + mobile) ===
+document.querySelectorAll('.palette__window').forEach(container => {
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.classList.add('dragging');
+        startX = e.pageX;
+        scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        isDown = false;
+        container.classList.remove('dragging');
+    });
+
+    container.addEventListener('mouseup', () => {
+        isDown = false;
+        container.classList.remove('dragging');
+    });
+
+    container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const walk = (e.pageX - startX) * 1.2;
+        container.scrollLeft = scrollLeft - walk;
+    });
+
+    // для тач-устройств (на всякий случай)
+    container.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX;
+        scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX;
+        const walk = (x - startX) * 1.2;
+        container.scrollLeft = scrollLeft - walk;
+    });
+});
+
 
 });
     
