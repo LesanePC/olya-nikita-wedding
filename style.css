@@ -13,31 +13,44 @@
 *::before,
 *::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-
 
 html,
 body {
     overflow-x: hidden;
 }
 
+/* ГЛОБАЛЬНО убираем линии у ссылок */
+a {
+    text-decoration: none !important;
+}
+
 /* ==============================
    Общие стили страницы
 ============================== */
 body {
-    margin: 0;
-    padding: 40px 20px;
+    padding: 15px 20px;
     background: #fffbf2;
     font-family: 'kom-post', cursive, sans-serif;
     text-align: center;
-    min-height: auto; /* вместо 100vh */
-    display: block;
+    line-height: 1.4;
+}
+
+/* УБИРАЕМ ВСЕ отступы между секциями */
+main>section {
+    margin-bottom: 0 !important;
+}
+
+section+section {
+    margin-top: 0 !important;
 }
 
 .invitation {
     position: relative;
-    min-height: 100svh; /* или 100vh */
-    padding: 40px 20px 80px;
+    min-height: 100svh;
+    padding: 15px 20px 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,25 +58,49 @@ body {
 }
 
 /* ==============================
-   Заголовки и имена пары
+   КОМПАКТНЫЕ отступы для секций
 ============================== */
-h1 {
-    font-size: clamp(2rem, 5vw, 5.5rem);
-    color: #535353;
-    margin: 0 0 30px;
-    letter-spacing: 0.1em;
+.location,
+.schedule,
+.dresscode,
+.examples,
+.looks,
+.wishes,
+.final,
+.section,
+.man {
+    padding: 20px 20px;
+    background: #fffbf2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 /* ==============================
-   Блок couple с анимацией
+   Заголовки и тексты — МИНИМАЛЬНЫЕ отступы
 ============================== */
+h1,
+h2,
+.schedule-title,
+.dress-title,
+.looks-title,
+.wishes-title,
+.final-title,
+.palette-title {
+    font-size: clamp(2rem, 4vw, 5.5rem);
+    color: #535353;
+    margin: 8px 0;
+    line-height: 1.2;
+}
+
 .couple {
     font-size: clamp(7rem, 13vw, 13rem);
     color: #AEA434;
     line-height: 1.2;
     width: 100%;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .name-left,
@@ -109,33 +146,31 @@ h1 {
     }
 }
 
-
 .invite {
     font-size: clamp(2rem, 4vw, 4.5rem);
     color: #535353;
-    margin: 0 0 50px;
-    line-height: 1.6;
+    margin: 15px 0;
+    line-height: 1.4;
 }
 
 .date {
     font-size: clamp(3rem, 8vw, 9rem);
     color: #E26728;
     letter-spacing: 0.05em;
+    margin: 10px 0;
 }
 
 .countdown {
-    font-family: 'kom-post', cursive;
-    text-align: center;
-    margin: 40px 0;
+    margin: 15px 0;
     font-size: clamp(2rem, 4vw, 4.5rem);
     color: #E26728;
 }
 
 .countdown .time {
-    margin-top: 10px;
+    margin-top: 8px;
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
@@ -143,51 +178,44 @@ h1 {
     font-weight: bold;
     font-size: clamp(2rem, 4vw, 5rem);
 }
-.section {
-    padding: 70px 20px;
+
+.note {
+    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    color: #535353;
+    line-height: 1.4;
+    margin: 10px auto;
+    max-width: 700px;
 }
 
-.note,
-.man {
-    margin: 40px auto;
-    text-align: center;
-}
 /* ==============================
-   Анимация появления при скролле
+   Анимация появления
 ============================== */
 .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Когда элемент стал видимым */
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
 
 /* ==============================
-   Scroll hint (стрелка скролла)
+   Scroll hint
 ============================== */
 .scroll-hint {
     position: fixed;
-    /* вместо absolute */
-    bottom: 20px;
-    /* отступ от низа окна */
+    bottom: 15px;
     left: 50%;
-    /* по центру */
     transform: translateX(-50%);
     z-index: 1000;
-    /* чтобы была поверх всего */
     pointer-events: none;
-    /* чтобы клики проходили */
 }
 
 .scroll-hint .arrow {
     display: block;
-    font-family: 'kom-post', cursive;
-    font-size: 5rem;
+    font-size: 4rem;
     color: #535353;
     transform: rotate(90deg);
     animation: arrowMove 2s infinite ease-in-out;
@@ -200,7 +228,7 @@ h1 {
     }
 
     50% {
-        transform: rotate(90deg) translateX(12px);
+        transform: rotate(90deg) translateX(10px);
         opacity: 0.9;
     }
 
@@ -211,7 +239,7 @@ h1 {
 }
 
 /* ==============================
-   Изображения / декор
+   Изображения — МИНИМАЛЬНЫЕ отступы
 ============================== */
 .hearts,
 .dance,
@@ -222,69 +250,58 @@ h1 {
 .wishes-img {
     width: 100%;
     max-width: 800px;
-    margin: 0 auto 40px;
+    margin: 8px auto;
     display: block;
 }
 
 /* ==============================
-   Локация
+   СПЕЦИФИЧНЫЕ стили блоков
 ============================== */
-.location {
-    padding: 80px 20px;
-    background: #fffbf2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.location-text {
-    font-size: clamp(2rem, 5vw, 9.5rem);
+.location-text,
+.place,
+.address,
+.dress-text,
+.examples-text,
+.wishes-text,
+.final-text,
+.final-accent {
+    font-size: clamp(1.5rem, 3vw, 4.5rem);
     color: #535353;
-    line-height: 1.5;
-    margin: 0 0 30px;
+    line-height: 1.4;
+    margin: 8px 0;
 }
 
 .place {
-    font-size: clamp(2rem, 4vw, 9.5rem);
     color: #AEA434;
-    margin: 0 0 30px;
     letter-spacing: 0.1em;
 }
 
-.address {
-    font-size: clamp(1.5rem, 3vw, 4.5rem);
-    color: #535353;
-    line-height: 1.6;
-    margin: 0;
+.dress-title {
+    color: #F69593;
+    letter-spacing: 0.15em;
 }
 
-/* ==============================
-   Расписание
-============================== */
-.schedule {
-    padding: 80px 20px;
-    background: #fffbf2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+.wishes-title {
+    color: #D9ADD1;
+    letter-spacing: 0.1em;
 }
 
-.schedule-title {
-    font-size: clamp(2rem, 4vw, 4.5rem);
-    color: #535353;
-    margin: 0 0 40px;
+.final-title {
+    color: #8EC1F4;
+}
+
+.final-accent {
+    color: #E26728;
 }
 
 .timeline {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 5px 0;
 }
 
 .timeline li {
-    margin-bottom: 28px;
+    margin-bottom: 6px;
 }
 
 .time,
@@ -299,101 +316,48 @@ h1 {
     color: #8EC1F4;
 }
 
-/* ==============================
-   Дресс-код
-============================== */
-.dresscode {
-    padding: 80px 20px;
-    background: #fffbf2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+/* Карта — БЕЗ ЛИНИЙ */
+.map-link {
+    color: #E26728 !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
 }
 
-.dress-title {
-    font-size: clamp(2rem, 4vw, 9.5rem);
-    color: #F69593;
-    margin: 0 0 30px;
-    letter-spacing: 0.15em;
+.map-link:hover,
+.map-link:focus,
+.map-link:active {
+    color: #AEA434 !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
 }
 
-.dress-text {
-    font-size: clamp(1.5rem, 3vw, 4.5rem);
-    color: #535353;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* ==============================
-   Примеры образов
-============================== */
-.examples {
-    padding: 80px 20px;
-    background: #fffbf2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.examples-text {
-    font-size: clamp(1.5rem, 3vw, 4.5rem);
-    color: #535353;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* ==============================
-   Looks / заметки
-============================== */
-.looks {
-    padding: 80px 20px;
-    background: #fffbf2;
-    text-align: center;
-}
-
-.looks-title {
-    font-size: clamp(2rem, 4vw, 6.5rem);
-    color: #535353;
-    margin: 40px 0 30px;
-}
-
-.note {
-    font-size: clamp(1.5rem, 3vw, 3.5rem);
-    color: #535353;
-    line-height: 1.6;
-    margin: 40px auto 0;
-    max-width: 700px;
-}
-
-/* Окно просмотра */
+/* Palette */
 .palette {
     display: flex;
     justify-content: center;
+    margin: 10px 0;
 }
+
 .palette__window {
     width: 100%;
     max-width: 960px;
     height: 420px;
     cursor: grab;
-    overflow-x: auto;      /* ← ВАЖНО */
+    overflow-x: auto;
     overflow-y: hidden;
-
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-
     position: relative;
 }
+
 .palette__window.dragging {
     cursor: grabbing;
 }
-/* скрываем скроллбар */
+
 .palette__window::-webkit-scrollbar {
     display: none;
 }
 
-/* вместо background-image */
 .palette__image {
     height: 100%;
     width: max-content;
@@ -408,173 +372,78 @@ h1 {
     pointer-events: none;
 }
 
-
-/* ==============================
-   Адаптация
-============================== */
-
-@media (max-width: 1200px) {
-    .palette__window {
-        width: 90vw;
-        height: 380px;
-    }
-}
-
-@media (max-width: 768px) {
-    .palette__window {
-        height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .palette {
-        margin: 60px auto;
-    }
-
-    .palette__window {
-        height: 220px;
-    }
-
-    .palette__window::before,
-    .palette__window::after {
-        width: 50px;
-    }
-}
-
-
-
-/* ==============================
-   Пожелания
-============================== */
-.wishes {
-    padding: 80px 20px;
-    background: #fffbf2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.wishes-title {
-    font-size: clamp(2rem, 4vw, 9.5rem);
-    color: #D9ADD1;
-    margin: 0 0 50px;
-    letter-spacing: 0.1em;
-}
-
-.wishes-text {
-    font-size: clamp(1.5rem, 3vw, 4.5rem);
+.palette-title {
+    font-size: clamp(2rem, 4vw, 4.5rem);
     color: #535353;
-    line-height: 1.6;
-    margin: 0 0 40px;
-    max-width: 800px;
+    margin: 10px 0;
 }
 
-/* ==============================
-   Финальный блок
-============================== */
-.final {
-    padding: 80px 20px 40px;
-    background: #fffbf2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
+.wishes-img {
+    max-width: 450px;
+    width: 55vw;
+    height: auto;
+    max-height: 400px;
 }
 
-.final-title {
-    font-size: clamp(2rem, 4vw, 9.5rem);
-    color: #535353;
-    margin: 0 0 40px;
-    line-height: 1.3;
-}
-
-.final-text,
-.final-accent {
-    font-size: clamp(1.5rem, 3vw, 4.5rem);
-    line-height: 1.6;
-    margin: 0 0 40px;
-}
-
-.final-accent {
-    color: #E26728;
-}
-
+/* Финальные ссылки — ПО ЦЕНТРУ */
 .final-links {
     width: 100%;
+    max-width: 600px;
     display: flex;
-    justify-content: space-between;
-    padding: 0 40px;
+    justify-content: center;
+    gap: 30px;
+    padding: 0;
     font-weight: bold;
+    margin: 10px auto;
 }
 
 .final-link {
     font-size: clamp(1.5rem, 3vw, 4.5rem);
     color: #E26728;
-    text-decoration: none;
 }
 
 .final-link:hover {
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 /* ==============================
-   Медиа-запросы для экранов <=768px
+   МОБИЛЬНАЯ АДАПТАЦИЯ — СУПЕР КОМПАКТНАЯ
 ============================== */
 @media (max-width: 768px) {
     body {
-        padding: 0;
+        padding: 10px 15px;
     }
 
-    /* Общие блоки */
     .location,
     .schedule,
     .dresscode,
     .examples,
     .looks,
     .wishes,
-    .final {
-        min-height: auto;
-        padding: 40px 15px;
-        margin-bottom: 50px;
+    .final,
+    .section,
+    .man {
+        padding: 12px 15px;
     }
 
+    .invitation {
+        padding: 10px 15px 25px;
     }
 
-    /* Финальные ссылки вертикально */
-    .final-links {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        padding: 0 20px;
-    }
-
-    /* Отступы между элементами */
-    .invite,
-    .date,
-    .couple,
-    .schedule-title,
-    .dress-title,
-    .looks-title,
-    .wishes-title,
-    .final-title {
-        margin-bottom: 5px;
-    }
-
-    .time,
-    .event,
+    h1,
+    h2,
+    p,
+    .note,
+    .location-text,
+    .place,
     .address,
     .dress-text,
     .examples-text,
-    .note,
     .wishes-text,
-    .final-text,
-    .final-accent {
-        margin-bottom: 5px;
+    .final-text {
+        margin: 4px 0 !important;
     }
 
-    /* Изображения */
     .hearts,
     .dance,
     .stars,
@@ -582,7 +451,42 @@ h1 {
     .angels,
     .final-img,
     .wishes-img {
-        max-width: 100%;
-        margin-bottom: 10px;
+        margin: 4px auto !important;
+    }
+
+    .wishes-img {
+        max-width: 280px !important;
+        width: 70vw;
+        max-height: 160px;
+    }
+
+    .timeline li {
+        margin-bottom: 4px;
+    }
+
+    .final-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .palette {
+        margin: 8px 0;
+    }
+
+    .palette__window {
+        height: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .palette__window {
+        height: 220px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .palette__window {
+        width: 90vw;
+        height: 380px;
     }
 }

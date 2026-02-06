@@ -55,10 +55,14 @@
             <p class="place">"ДРЕПИН ДАЧА"</p>
 
             <p class="address">
-                по адресу<br>
-                химки, садовое товарищество<br>
-                жилино-1, 9
+                <span>по адресу</span><br>
+                <a href="https://yandex.ru/maps/-/CPEc5Hl3" target="_blank" rel="noopener noreferrer" class="map-link">
+                    химки, садовое товарищество<br>
+                    жилино-1, 9
+                </a>
             </p>
+
+
         </section>
         <section class="section schedule reveal">
             <img src="images/3.png" alt="Пара под звездами" class="stars">
@@ -116,8 +120,8 @@
         <section class="section palette">
             <div class="palette__window">
                 <div class="palette__image">
-      <img src="./images/dress/panorama1.png" alt="">
-    </div>
+                    <img src="./images/dress/panorama1.png" alt="">
+                </div>
             </div>
         </section>
         <p class="note">
@@ -128,8 +132,8 @@
         <section class="section palette">
             <div class="palette__window">
                 <div class="palette__image">
-      <img src="./images/dress/panorama3.png" alt="">
-    </div>
+                    <img src="./images/dress/panorama3.png" alt="">
+                </div>
             </div>
         </section>
         <section class="man">
@@ -142,8 +146,8 @@
         <section class="section palette">
             <div class="palette__window">
                 <div class="palette__image">
-      <img src="./images/dress/panorama2.png" alt="">
-    </div>
+                    <img src="./images/dress/panorama2.png" alt="">
+                </div>
             </div>
         </section>
 
@@ -195,8 +199,11 @@
                 01.04.2026
             </p>
             <div class="final-links">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScVyhVLHWlb2bJF-vWavuqFj2c7w4hO1ZqLM6B9jEnYMi-xqA/viewform" class="final-link">анкета</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScVyhVLHWlb2bJF-vWavuqFj2c7w4hO1ZqLM6B9jEnYMi-xqA/viewform" class="final-link" target="_blank" rel="noopener noreferrer">
+                    анкета
+                </a>
             </div>
+
 
             <img src="images/6.png" alt="Гости на празднике" class="final-img">
 
@@ -207,120 +214,128 @@
     <script src="countdown.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-document.querySelectorAll('.palette__window').forEach(p => {
-    p.scrollLeft = (p.scrollWidth - p.clientWidth) / 2;
-});
-    // === Слайдеры ===
-    document.querySelectorAll('.slider').forEach(slider => {
-        const slides = slider.querySelectorAll('.slides img');
-        let index = 0;
-        slides[index].classList.add('active');
-
-        slider.querySelector('.left').onclick = () => {
-            slides[index].classList.remove('active');
-            index = (index - 1 + slides.length) % slides.length;
-            slides[index].classList.add('active');
-        };
-
-        slider.querySelector('.right').onclick = () => {
-            slides[index].classList.remove('active');
-            index = (index + 1) % slides.length;
-            slides[index].classList.add('active');
-        };
-    });
-
-    // === Анимация появления секций ===
-    const reveals = document.querySelectorAll('.reveal');
-
-    const observer = new IntersectionObserver(
-        (entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    obs.unobserve(entry.target);
-                }
+            document.querySelectorAll('.palette__window').forEach(p => {
+                p.scrollLeft = (p.scrollWidth - p.clientWidth) / 2;
             });
-        }, 
-        {
-            threshold: 0.2,
-            rootMargin: '0px 0px -10% 0px'
-        }
-    );
+            // === Слайдеры ===
+            document.querySelectorAll('.slider').forEach(slider => {
+                const slides = slider.querySelectorAll('.slides img');
+                let index = 0;
+                slides[index].classList.add('active');
 
-    reveals.forEach(el => observer.observe(el));
+                slider.querySelector('.left').onclick = () => {
+                    slides[index].classList.remove('active');
+                    index = (index - 1 + slides.length) % slides.length;
+                    slides[index].classList.add('active');
+                };
 
-    // === Fallback для десктопа: активируем все блоки через 0.5s на случай, если IntersectionObserver не сработал ===
-    setTimeout(() => {
-        reveals.forEach(el => el.classList.add('active'));
-    }, 500);
+                slider.querySelector('.right').onclick = () => {
+                    slides[index].classList.remove('active');
+                    index = (index + 1) % slides.length;
+                    slides[index].classList.add('active');
+                };
+            });
 
-    // === Стрелка скролла ===
-    const scrollHint = document.querySelector('.scroll-hint');
+            // === Анимация появления секций ===
+            const reveals = document.querySelectorAll('.reveal');
 
-    scrollHint.style.opacity = '0.7';
-    scrollHint.style.transition = 'opacity 0.5s';
+            const observer = new IntersectionObserver(
+                (entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -10% 0px'
+                }
+            );
 
-    scrollHint.animate(
-        [
-            { transform: 'translateX(-50%) translateY(0px)', opacity: 0.4 },
-            { transform: 'translateX(-50%) translateY(10px)', opacity: 0.9 },
-            { transform: 'translateX(-50%) translateY(0px)', opacity: 0.4 }
-        ], 
-        { duration: 2000, iterations: Infinity }
-    );
+            reveals.forEach(el => observer.observe(el));
 
-    const updateScrollHint = () => {
-        scrollHint.style.opacity = window.scrollY > 40 ? '0' : '0.7';
-    };
+            // === Fallback для десктопа: активируем все блоки через 0.5s на случай, если IntersectionObserver не сработал ===
+            setTimeout(() => {
+                reveals.forEach(el => el.classList.add('active'));
+            }, 500);
 
-    window.addEventListener('scroll', updateScrollHint);
-    updateScrollHint();
+            // === Стрелка скролла ===
+            const scrollHint = document.querySelector('.scroll-hint');
+
+            scrollHint.style.opacity = '0.7';
+            scrollHint.style.transition = 'opacity 0.5s';
+
+            scrollHint.animate(
+                [{
+                        transform: 'translateX(-50%) translateY(0px)',
+                        opacity: 0.4
+                    },
+                    {
+                        transform: 'translateX(-50%) translateY(10px)',
+                        opacity: 0.9
+                    },
+                    {
+                        transform: 'translateX(-50%) translateY(0px)',
+                        opacity: 0.4
+                    }
+                ], {
+                    duration: 2000,
+                    iterations: Infinity
+                }
+            );
+
+            const updateScrollHint = () => {
+                scrollHint.style.opacity = window.scrollY > 40 ? '0' : '0.7';
+            };
+
+            window.addEventListener('scroll', updateScrollHint);
+            updateScrollHint();
             // === Drag-scroll для галерей (desktop + mobile) ===
-document.querySelectorAll('.palette__window').forEach(container => {
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
+            document.querySelectorAll('.palette__window').forEach(container => {
+                let isDown = false;
+                let startX = 0;
+                let scrollLeft = 0;
 
-    container.addEventListener('mousedown', (e) => {
-        isDown = true;
-        container.classList.add('dragging');
-        startX = e.pageX;
-        scrollLeft = container.scrollLeft;
-    });
+                container.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    container.classList.add('dragging');
+                    startX = e.pageX;
+                    scrollLeft = container.scrollLeft;
+                });
 
-    container.addEventListener('mouseleave', () => {
-        isDown = false;
-        container.classList.remove('dragging');
-    });
+                container.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    container.classList.remove('dragging');
+                });
 
-    container.addEventListener('mouseup', () => {
-        isDown = false;
-        container.classList.remove('dragging');
-    });
+                container.addEventListener('mouseup', () => {
+                    isDown = false;
+                    container.classList.remove('dragging');
+                });
 
-    container.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const walk = (e.pageX - startX) * 1.2;
-        container.scrollLeft = scrollLeft - walk;
-    });
+                container.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const walk = (e.pageX - startX) * 1.2;
+                    container.scrollLeft = scrollLeft - walk;
+                });
 
-    // для тач-устройств (на всякий случай)
-    container.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX;
-        scrollLeft = container.scrollLeft;
-    });
+                // для тач-устройств (на всякий случай)
+                container.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].pageX;
+                    scrollLeft = container.scrollLeft;
+                });
 
-    container.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX;
-        const walk = (x - startX) * 1.2;
-        container.scrollLeft = scrollLeft - walk;
-    });
-});
+                container.addEventListener('touchmove', (e) => {
+                    const x = e.touches[0].pageX;
+                    const walk = (x - startX) * 1.2;
+                    container.scrollLeft = scrollLeft - walk;
+                });
+            });
 
 
-});
-    
+        });
     </script>
 
 
