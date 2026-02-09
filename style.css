@@ -56,7 +56,10 @@ section+section {
     align-items: center;
     justify-content: center;
 }
-
+h1, h2, h3, h4, h5, h6, p, span, .note {
+    margin: 10px 0;       /* одинаковые вертикальные отступы */
+    line-height: 1.4;     /* единое расстояние между строк */
+}
 /* ==============================
    КОМПАКТНЫЕ отступы для секций
 ============================== */
@@ -378,12 +381,6 @@ h2,
     margin: 10px 0;
 }
 
-.wishes-img {
-    max-width: 450px;
-    width: 55vw;
-    height: auto;
-    max-height: 400px;
-}
 
 /* Финальные ссылки — ПО ЦЕНТРУ */
 .final-links {
@@ -454,11 +451,7 @@ h2,
         margin: 4px auto !important;
     }
 
-    .wishes-img {
-        max-width: 280px !important;
-        width: 70vw;
-        max-height: 160px;
-    }
+
 
     .timeline li {
         margin-bottom: 4px;
