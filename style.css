@@ -22,11 +22,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ГЛОБАЛЬНО убираем линии у ссылок */
-a {
-    text-decoration: none !important;
-}
-
 /* ==============================
    Общие стили страницы
 ============================== */
@@ -57,8 +52,7 @@ section+section {
     justify-content: center;
 }
 h1, h2, h3, h4, h5, h6, p, span, .note {
-    margin: 10px 0;       /* одинаковые вертикальные отступы */
-    line-height: 1.4;     /* единое расстояние между строк */
+    line-height: 1;
 }
 /* ==============================
    КОМПАКТНЫЕ отступы для секций
@@ -72,7 +66,6 @@ h1, h2, h3, h4, h5, h6, p, span, .note {
 .final,
 .section,
 .man {
-    padding: 20px 20px;
     background: #fffbf2;
     display: flex;
     flex-direction: column;
@@ -91,19 +84,19 @@ h2,
 .wishes-title,
 .final-title,
 .palette-title {
-    font-size: clamp(2rem, 4vw, 5.5rem);
+    font-size: 25px;
     color: #535353;
     margin: 8px 0;
-    line-height: 1.2;
+    
 }
 
 .couple {
-    font-size: clamp(7rem, 13vw, 13rem);
+    font-size: 80px;
     color: #AEA434;
-    line-height: 1.2;
+    line-height: 0.5;
     width: 100%;
     max-width: 900px;
-    margin: 10px auto;
+    
 }
 
 .name-left,
@@ -111,6 +104,7 @@ h2,
     display: block;
     opacity: 0;
     position: relative;
+    line-height: 1;
 }
 
 .name-left {
@@ -150,43 +144,42 @@ h2,
 }
 
 .invite {
-    font-size: clamp(2rem, 4vw, 4.5rem);
+    font-size: 25px;
     color: #535353;
-    margin: 15px 0;
-    line-height: 1.4;
+    line-height: 1;
 }
 
 .date {
-    font-size: clamp(3rem, 8vw, 9rem);
+    font-size: 40px;
     color: #E26728;
     letter-spacing: 0.05em;
-    margin: 10px 0;
+    
+    font-weight: bold;
 }
 
 .countdown {
     margin: 15px 0;
-    font-size: clamp(2rem, 4vw, 4.5rem);
-    color: #E26728;
+    font-size: 25px;
+    color: #535353;
+    line-height: 1;
 }
 
 .countdown .time {
-    margin-top: 8px;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
     flex-wrap: wrap;
 }
 
 .countdown .time span {
     font-weight: bold;
-    font-size: clamp(2rem, 4vw, 5rem);
+    font-size: 25px;
 }
 
 .note {
-    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    font-size: 25px;
     color: #535353;
-    line-height: 1.4;
-    margin: 10px auto;
+    line-height: 1;
     max-width: 700px;
 }
 
@@ -249,18 +242,21 @@ h2,
 .stars,
 .cherries,
 .angels,
-.final-img,
-.wishes-img {
+.final-img {
     width: 100%;
     max-width: 800px;
-    margin: 8px auto;
     display: block;
 }
-
+..wishes-img {
+    max-width: 450px;
+}
 /* ==============================
    СПЕЦИФИЧНЫЕ стили блоков
 ============================== */
-.location-text,
+.location-text {
+    color: #535353;
+    font-size: 40px;
+}
 .place,
 .address,
 .dress-text,
@@ -268,70 +264,68 @@ h2,
 .wishes-text,
 .final-text,
 .final-accent {
-    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    font-size: 25px;
     color: #535353;
-    line-height: 1.4;
-    margin: 8px 0;
+    line-height: 1;
+    
 }
 
 .place {
     color: #AEA434;
     letter-spacing: 0.1em;
+    font-size: 40px;
 }
 
 .dress-title {
     color: #F69593;
     letter-spacing: 0.15em;
+    font-weight: bold;
+    font-size: 40px;
 }
 
 .wishes-title {
     color: #D9ADD1;
     letter-spacing: 0.1em;
+    font-weight: bold;
+    font-size: 45px;
 }
 
 .final-title {
     color: #8EC1F4;
-}
-
-.final-accent {
-    color: #E26728;
+    font-weight: bold;
+    font-size: 45px;
 }
 
 .timeline {
     list-style: none;
     padding: 0;
-    margin: 5px 0;
+    
 }
 
-.timeline li {
-    margin-bottom: 6px;
-}
 
 .time,
 .event {
     display: block;
-    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    font-size: 30px;
     color: #535353;
 }
 
 .timeline .highlight .time,
 .timeline .highlight .event {
     color: #8EC1F4;
+    font-weight: bold;
+    font-size: 45px;
 }
 
 /* Карта — БЕЗ ЛИНИЙ */
 .map-link {
-    color: #E26728 !important;
-    text-decoration: none !important;
-    border-bottom: none !important;
+    color: #AEA434;
 }
 
 .map-link:hover,
 .map-link:focus,
 .map-link:active {
-    color: #AEA434 !important;
-    text-decoration: none !important;
-    border-bottom: none !important;
+    color: #AEA424;
 }
 
 /* Palette */
@@ -366,6 +360,11 @@ h2,
     width: max-content;
     display: flex;
 }
+.palette__shoes {
+    height: 70%;
+    width: max-content;
+    display: flex;
+}
 
 .palette__image img {
     height: 100%;
@@ -376,11 +375,15 @@ h2,
 }
 
 .palette-title {
-    font-size: clamp(2rem, 4vw, 4.5rem);
+    font-size: 40px;
     color: #535353;
     margin: 10px 0;
 }
-
+.note {
+    font-size: 25px;
+    color: #535353;
+    
+}
 
 /* Финальные ссылки — ПО ЦЕНТРУ */
 .final-links {
@@ -390,12 +393,12 @@ h2,
     justify-content: center;
     gap: 30px;
     padding: 0;
-    font-weight: bold;
-    margin: 10px auto;
+    
 }
 
 .final-link {
-    font-size: clamp(1.5rem, 3vw, 4.5rem);
+    font-size: 40px;
+    font-weight: bold;
     color: #E26728;
 }
 
@@ -408,7 +411,8 @@ h2,
 ============================== */
 @media (max-width: 768px) {
     body {
-        padding: 10px 15px;
+        padding: 0;
+        margin: 0;
     }
 
     .location,
@@ -423,9 +427,6 @@ h2,
         padding: 12px 15px;
     }
 
-    .invitation {
-        padding: 10px 15px 25px;
-    }
 
     h1,
     h2,
@@ -438,7 +439,7 @@ h2,
     .examples-text,
     .wishes-text,
     .final-text {
-        margin: 4px 0 !important;
+        margin: 0;
     }
 
     .hearts,
@@ -446,24 +447,22 @@ h2,
     .stars,
     .cherries,
     .angels,
-    .final-img,
+    .final-img {
+        margin: 0;
+    }
     .wishes-img {
-        margin: 4px auto !important;
+        max-width: 250px;
+        margin: 0;
     }
-
-
-
-    .timeline li {
-        margin-bottom: 4px;
-    }
-
     .final-links {
         flex-direction: column;
         gap: 8px;
+        font-weight: bold;
+        font-size: 45px;
     }
 
     .palette {
-        margin: 8px 0;
+        margin: 0;
     }
 
     .palette__window {
@@ -480,6 +479,5 @@ h2,
 @media (max-width: 1200px) {
     .palette__window {
         width: 90vw;
-        height: 380px;
     }
 }
