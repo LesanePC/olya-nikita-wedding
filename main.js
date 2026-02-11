@@ -1,13 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Центрируем все галереи =====
-    // При загрузке страницы прокручиваем каждую горизонтальную галерею к центру
     document.querySelectorAll('.palette__window').forEach(p => {
         p.scrollLeft = (p.scrollWidth - p.clientWidth) / 2;
     });
 
     // ===== Слайдеры =====
-    // Кнопки "влево / вправо" + активный слайд
     document.querySelectorAll('.slider').forEach(slider => {
         const slides = slider.querySelectorAll('.slides img');
         let index = 0;
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Анимация появления секций =====
     const reveals = document.querySelectorAll('.reveal');
-
     const revealObserver = new IntersectionObserver(
         (entries, obs) => {
             entries.forEach(entry => {
@@ -39,15 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         },
-        {
-            threshold: 0.2,
-            rootMargin: '0px 0px -10% 0px'
-        }
+        { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
     );
-
     reveals.forEach(el => revealObserver.observe(el));
 
-    // Fallback — если IntersectionObserver не сработал
+    // Fallback: если IntersectionObserver не сработал
     setTimeout(() => {
         reveals.forEach(el => el.classList.add('active'));
     }, 500);
@@ -57,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const finalSection = document.querySelector('.final');
 
     if (scrollHint && finalSection) {
-
         // Анимация стрелки
         const arrowAnim = scrollHint.animate(
             [
@@ -70,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         scrollHint.style.transition = 'opacity 0.5s ease';
 
-        // Скрываем стрелку, когда появляется финальный блок
+        // Скрытие стрелки при финальном блоке
         const arrowObserver = new IntersectionObserver(
             entries => {
                 entries.forEach(entry => {
@@ -85,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             { threshold: 0.1 }
         );
-
         arrowObserver.observe(finalSection);
     }
 
@@ -93,26 +84,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.palette__window').forEach(container => {
         let isDown = false;
         let startX = 0;
-
         let currentScroll = 0;
         let targetScroll = 0;
-        let rafId = null;
 
-        // Плавное догоняющее движение
+        // Постоянная анимация сглаживания
         const smoothScroll = () => {
-            currentScroll += (targetScroll - currentScroll) * 0.12;
+            currentScroll += (targetScroll - currentScroll) * 0.2; // коэффициент сглаживания
             container.scrollLeft = currentScroll;
-
-            if (Math.abs(targetScroll - currentScroll) > 0.5) {
-                rafId = requestAnimationFrame(smoothScroll);
-            } else {
-                rafId = null;
-            }
+            requestAnimationFrame(smoothScroll);
         };
-
-        const startSmooth = () => {
-            if (!rafId) smoothScroll();
-        };
+        smoothScroll();
 
         // ===== Mouse =====
         container.addEventListener('mousedown', e => {
@@ -128,17 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const walk = (e.pageX - startX) * 1.3;
             targetScroll = currentScroll - walk;
-            startSmooth();
         });
 
         container.addEventListener('mouseup', () => {
             isDown = false;
             container.classList.remove('dragging');
+            currentScroll = container.scrollLeft;
         });
 
         container.addEventListener('mouseleave', () => {
             isDown = false;
             container.classList.remove('dragging');
+            currentScroll = container.scrollLeft;
         });
 
         // ===== Touch =====
@@ -152,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const x = e.touches[0].pageX;
             const walk = (x - startX) * 1.3;
             targetScroll = currentScroll - walk;
-            startSmooth();
         }, { passive: true });
     });
 

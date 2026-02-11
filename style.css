@@ -45,7 +45,7 @@ section+section {
 .invitation {
     position: relative;
     min-height: 100svh;
-    padding: 15px 20px 30px;
+    padding: 0px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -167,8 +167,9 @@ h2,
 .countdown .time {
     display: flex;
     justify-content: center;
-    gap: 5px;
-    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 20px;
+    
 }
 
 .countdown .time span {
@@ -247,7 +248,7 @@ h2,
     max-width: 800px;
     display: block;
 }
-..wishes-img {
+.wishes-img {
     max-width: 450px;
 }
 /* ==============================
@@ -330,6 +331,7 @@ h2,
 
 /* Palette */
 .palette {
+    position: relative;
     display: flex;
     justify-content: center;
     margin: 10px 0;
@@ -384,6 +386,59 @@ h2,
     color: #535353;
     
 }
+/* ==============================
+   Стрелки для галерей
+============================== */
+
+.scroll-arrow {
+    position: absolute;
+    top: 50%; /* центр по вертикали окна */
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: #535353;
+    pointer-events: none; /* не кликабельные */
+    z-index: 10;
+    animation: arrowPulse 1.5s infinite ease-in-out;
+}
+
+.scroll-arrow.left {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+}
+
+.scroll-arrow.right {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+.scroll-arrow.shoes-l {
+    position: absolute;
+    left: 5px;
+    bottom: 1px;
+}
+.scroll-arrow.shoes-r {
+    position: absolute;
+    right: 5px;
+    bottom: 1px;
+}
+.scroll-arrow.left-m {
+    position: absolute;
+    left: 5px;
+}
+
+.scroll-arrow.right-m {
+    position: absolute;
+    right: 5px;
+}
+
+@keyframes arrowPulse {
+    0% { transform: translateY(-50%) translateX(0); opacity: 0.4; }
+    50% { transform: translateY(-50%) translateX(5px); opacity: 0.9; }
+    100% { transform: translateY(-50%) translateX(0); opacity: 0.4; }
+}
+
+
 
 /* Финальные ссылки — ПО ЦЕНТРУ */
 .final-links {
@@ -424,7 +479,7 @@ h2,
     .final,
     .section,
     .man {
-        padding: 12px 15px;
+        padding: 0 15px;
     }
 
 
@@ -443,12 +498,14 @@ h2,
     }
 
     .hearts,
-    .dance,
     .stars,
     .cherries,
     .angels,
     .final-img {
         margin: 0;
+    }
+    .dance {
+        margin-top: -70px;
     }
     .wishes-img {
         max-width: 250px;
@@ -473,6 +530,9 @@ h2,
 @media (max-width: 480px) {
     .palette__window {
         height: 220px;
+    }
+    .dance {
+        margin-top: -50px;
     }
 }
 
