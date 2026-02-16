@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Постоянная анимация сглаживания
         const smoothScroll = () => {
-            currentScroll += (targetScroll - currentScroll) * 0.2; // коэффициент сглаживания
+            currentScroll += (targetScroll - currentScroll) * 0.5; // коэффициент сглаживания
             container.scrollLeft = currentScroll;
             requestAnimationFrame(smoothScroll);
         };
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('mousemove', e => {
             if (!isDown) return;
             e.preventDefault();
-            const walk = (e.pageX - startX) * 1.3;
+            const walk = (e.pageX - startX) * 0.5;
             targetScroll = currentScroll - walk;
         });
 
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.addEventListener('touchmove', e => {
             const x = e.touches[0].pageX;
-            const walk = (x - startX) * 1.3;
+            const walk = (x - startX) * 0.5;
             targetScroll = currentScroll - walk;
         }, { passive: true });
     });
