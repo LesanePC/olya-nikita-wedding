@@ -78,20 +78,24 @@ h1, h2, h3, h4, h5, h6, p, span, .note {
 ============================== */
 h1,
 h2,
-.schedule-title,
-.dress-title,
 .looks-title,
 .wishes-title,
-.final-title,
-.palette-title {
+.final-title {
     font-size: 25px;
     color: #535353;
-    margin: 8px 0;
-    
 }
 
+.dress-title {
+    margin-top: -35px;
+}
+
+.schedule-title {
+    margin-top: -35px;
+    font-size: 25px;
+    color: #535353;
+}
 .couple {
-    font-size: 80px;
+    font-size: 100px;
     color: #AEA434;
     line-height: 0.5;
     width: 100%;
@@ -177,12 +181,7 @@ h2,
     font-size: 25px;
 }
 
-.note {
-    font-size: 25px;
-    color: #535353;
-    line-height: 1;
-    max-width: 700px;
-}
+
 
 /* ==============================
    Анимация появления
@@ -244,7 +243,7 @@ h2,
 .cherries,
 .angels,
 .final-img {
-    width: 100%;
+    width: 80%;
     max-width: 800px;
     display: block;
 }
@@ -289,12 +288,14 @@ h2,
     letter-spacing: 0.1em;
     font-weight: bold;
     font-size: 45px;
+    margin-top: 30px;
 }
 
 .final-title {
     color: #8EC1F4;
     font-weight: bold;
     font-size: 45px;
+    margin-top: 30px;
 }
 
 .timeline {
@@ -348,7 +349,20 @@ h2,
     scroll-behavior: smooth;
     position: relative;
 }
-
+.palette__window_shoes {
+    width: 100%;
+    max-width: 960px;
+    height: 200px;
+    cursor: grab;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    position: relative;
+}
+.palette__window_shoes::-webkit-scrollbar {
+    display: none;
+}
 .palette__window.dragging {
     cursor: grabbing;
 }
@@ -379,11 +393,19 @@ h2,
 .palette-title {
     font-size: 40px;
     color: #535353;
-    margin: 10px 0;
+    margin-top: 0;
+}
+.palette-title_man {
+    font-size: 40px;
+    color: #535353;
+    margin-top: -60px;
+    z-index: 1000;
+    position: relative;
 }
 .note {
     font-size: 25px;
     color: #535353;
+    margin: 0;
     
 }
 /* ==============================
@@ -466,7 +488,7 @@ h2,
 ============================== */
 @media (max-width: 768px) {
     body {
-        padding: 0;
+        
         margin: 0;
     }
 
@@ -486,8 +508,6 @@ h2,
     h1,
     h2,
     p,
-    .note,
-    .location-text,
     .place,
     .address,
     .dress-text,
@@ -496,20 +516,26 @@ h2,
     .final-text {
         margin: 0;
     }
-
+    .location-text {
+        margin-top: -35px;
+    }
     .hearts,
-    .stars,
-    .cherries,
-    .angels,
-    .final-img {
-        margin: 0;
-    }
-    .dance {
-        margin-top: -70px;
-    }
+.dance,
+.stars,
+.cherries,
+.angels,
+.final-img {
+    width: 80%;
+    max-width: 800px;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+    
     .wishes-img {
         max-width: 250px;
-        margin: 0;
+        margin: -70px;
+        
     }
     .final-links {
         flex-direction: column;
@@ -525,15 +551,14 @@ h2,
     .palette__window {
         height: 280px;
     }
+    
 }
 
 @media (max-width: 480px) {
     .palette__window {
         height: 220px;
     }
-    .dance {
-        margin-top: -50px;
-    }
+    
 }
 
 @media (max-width: 1200px) {
