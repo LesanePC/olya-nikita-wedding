@@ -19,6 +19,7 @@
 
 html,
 body {
+    height: 100%;
   overflow-x: hidden;
 }
 
@@ -26,13 +27,21 @@ body {
    Общие стили страницы
 ============================== */
 body {
-  padding: 15px 20px;
+  margin: 0;
+  padding: 0;
   background: #fffbf2;
   font-family: 'kom-post', cursive, sans-serif;
   text-align: center;
   line-height: 1.4;
+    display: flex;
+  justify-content: center;
 }
-
+.page {
+  width: 375px;           /* ширина как у мобильного макета */
+  min-height: 100%;
+  padding: 15px 20px;     /* твои старые паддинги body */
+  background: #fffbf2;
+}
 /* УБИРАЕМ ВСЕ отступы между секциями */
 main > section {
   margin-bottom: 0 !important;
@@ -565,6 +574,6 @@ h2,
 
 @media (max-width: 1200px) {
   .palette__window {
-    width: 90vw;
+    width: 100%;
   }
 }

@@ -85,14 +85,27 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let currentScroll = 0;
     let targetScroll = 0;
+    let rafId = null;
 
-    // Постоянная анимация сглаживания
+    // Запускаем сглаживание ТОЛЬКО когда нужно
     const smoothScroll = () => {
-      currentScroll += (targetScroll - currentScroll) * 0.5; // коэффициент сглаживания
+      currentScroll += (targetScroll - currentScroll) * 0.5;
       container.scrollLeft = currentScroll;
-      requestAnimationFrame(smoothScroll);
+      
+      // Останавливаем, если уже дошли
+      if (Math.abs(targetScroll - currentScroll) < 1) {
+        cancelAnimationFrame(rafId);
+        return;
+      }
+      
+      rafId = requestAnimationFrame(smoothScroll);
     };
-    smoothScroll();
+
+    // Запуск сглаживания при изменении targetScroll
+    const startSmoothScroll = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(smoothScroll);
+    };
 
     // ===== Mouse =====
     container.addEventListener('mousedown', e => {
@@ -101,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
       startX = e.pageX;
       currentScroll = container.scrollLeft;
       targetScroll = currentScroll;
+      if (rafId) cancelAnimationFrame(rafId);
     });
 
     container.addEventListener('mousemove', e => {
@@ -108,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const walk = (e.pageX - startX) * 0.5;
       targetScroll = currentScroll - walk;
+      startSmoothScroll();
     });
 
     container.addEventListener('mouseup', () => {
@@ -120,27 +135,26 @@ document.addEventListener('DOMContentLoaded', () => {
       isDown = false;
       container.classList.remove('dragging');
       currentScroll = container.scrollLeft;
+      startSmoothScroll();
     });
 
     // ===== Touch =====
-    container.addEventListener(
-      'touchstart',
-      e => {
-        startX = e.touches[0].pageX;
-        currentScroll = container.scrollLeft;
-        targetScroll = currentScroll;
-      },
-      { passive: true }
-    );
+    container.addEventListener('touchstart', e => {
+      startX = e.touches[0].pageX;
+      currentScroll = container.scrollLeft;
+      targetScroll = currentScroll;
+      if (rafId) cancelAnimationFrame(rafId);
+    }, { passive: true });
 
-    container.addEventListener(
-      'touchmove',
-      e => {
-        const x = e.touches[0].pageX;
-        const walk = (x - startX) * 0.5;
-        targetScroll = currentScroll - walk;
-      },
-      { passive: true }
-    );
+    container.addEventListener('touchmove', e => {
+      const x = e.touches[0].pageX;
+      const walk = (x - startX) * 0.5;
+      targetScroll = currentScroll - walk;
+      startSmoothScroll();
+    }, { passive: false });
+
+    container.addEventListener('touchend', () => {
+      startSmoothScroll();
+    }, { passive: true });
   });
 });
