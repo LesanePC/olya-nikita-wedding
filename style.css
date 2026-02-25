@@ -19,7 +19,7 @@
 
 html,
 body {
-    height: 100%;
+  height: 100%;
   overflow-x: hidden;
 }
 
@@ -33,16 +33,16 @@ body {
   font-family: 'kom-post', cursive, sans-serif;
   text-align: center;
   line-height: 1.4;
-    display: flex;
+  display: flex;
   justify-content: center;
 }
 .page {
-  width: 375px;           /* ширина как у мобильного макета */
+  width: 100%;
   min-height: 100%;
-  padding: 15px 20px;     /* твои старые паддинги body */
+  padding: 15px 20px;
   background: #fffbf2;
 }
-/* УБИРАЕМ ВСЕ отступы между секциями */
+
 main > section {
   margin-bottom: 0 !important;
 }
@@ -260,9 +260,11 @@ h2,
   width: 80%;
   max-width: 800px;
   display: block;
+  margin: -40px;
 }
 .wishes-img {
   max-width: 450px;
+  margin: -150px;
 }
 /* ==============================
    СПЕЦИФИЧНЫЕ стили блоков
@@ -362,8 +364,8 @@ h2,
 }
 .palette__window_shoes {
   width: 100%;
-  max-width: 960px;
-  height: 200px;
+  max-width: 900px;
+  height: 250px;
   cursor: grab;
   overflow-x: auto;
   overflow-y: hidden;
@@ -389,10 +391,13 @@ h2,
 }
 .palette__shoes {
   height: 80%;
-  width: max-content;
   display: flex;
 }
-
+.palette__shoes img {
+  flex-shrink: 0;
+  height: 100%;
+  width: auto;
+}
 .palette__image img {
   height: 100%;
   width: auto;

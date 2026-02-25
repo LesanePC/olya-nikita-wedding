@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ===== Центрируем все галереи =====
-  document.querySelectorAll('.palette__window').forEach(p => {
-    p.scrollLeft = (p.scrollWidth - p.clientWidth) / 2;
-  });
+  document
+    .querySelectorAll('.palette__window, .palette__window_shoes')
+    .forEach(p => {
+      p.scrollLeft = (p.scrollWidth - p.clientWidth) / 2;
+    });
 
   // ===== Слайдеры =====
   document.querySelectorAll('.slider').forEach(slider => {
@@ -79,82 +81,108 @@ document.addEventListener('DOMContentLoaded', () => {
     arrowObserver.observe(finalSection);
   }
 
-  // ===== Плавный Drag-scroll для галерей =====
-  document.querySelectorAll('.palette__window').forEach(container => {
-    let isDown = false;
-    let startX = 0;
-    let currentScroll = 0;
-    let targetScroll = 0;
-    let rafId = null;
+  // ===== ПЛАВНЫЙ Drag-scroll ДЛЯ ВСЕХ =====
+  document
+    .querySelectorAll('.palette__window, .palette__window_shoes')
+    .forEach(container => {
+      let isDragging = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      let velocity = 0;
+      let rafId = null;
 
-    // Запускаем сглаживание ТОЛЬКО когда нужно
-    const smoothScroll = () => {
-      currentScroll += (targetScroll - currentScroll) * 0.5;
-      container.scrollLeft = currentScroll;
-      
-      // Останавливаем, если уже дошли
-      if (Math.abs(targetScroll - currentScroll) < 1) {
-        cancelAnimationFrame(rafId);
-        return;
-      }
-      
-      rafId = requestAnimationFrame(smoothScroll);
-    };
+      const smoothScroll = () => {
+        container.scrollLeft += velocity;
+        velocity *= 0.92; // Трение
 
-    // Запуск сглаживания при изменении targetScroll
-    const startSmoothScroll = () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(smoothScroll);
-    };
+        if (Math.abs(velocity) > 0.1) {
+          rafId = requestAnimationFrame(smoothScroll);
+        }
+      };
 
-    // ===== Mouse =====
-    container.addEventListener('mousedown', e => {
-      isDown = true;
-      container.classList.add('dragging');
-      startX = e.pageX;
-      currentScroll = container.scrollLeft;
-      targetScroll = currentScroll;
-      if (rafId) cancelAnimationFrame(rafId);
+      // ===== MOUSE ДЕСКТОП (ИСПРАВЛЕНО) =====
+      container.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.pageX;
+        scrollLeft = container.scrollLeft;
+        velocity = 0;
+        if (rafId) cancelAnimationFrame(rafId);
+        container.classList.add('dragging');
+        container.style.scrollBehavior = 'auto';
+      });
+
+      container.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX;
+        const walk = (x - startX) * 1.2; // Чувствительность для мыши
+        container.scrollLeft = scrollLeft - walk;
+        velocity = walk * 0.1;
+      });
+
+      container.addEventListener('mouseup', () => {
+        isDragging = false;
+        container.classList.remove('dragging');
+        container.style.scrollBehavior = 'smooth';
+        rafId = requestAnimationFrame(smoothScroll);
+      });
+
+      container.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          container.classList.remove('dragging');
+          container.style.scrollBehavior = 'smooth';
+          rafId = requestAnimationFrame(smoothScroll);
+        }
+      });
+
+      // ===== TOUCH МОБИЛКИ (ОСТАЕТСЯ) =====
+      let touchStartX = 0;
+
+      container.addEventListener(
+        'touchstart',
+        e => {
+          touchStartX = e.touches[0].pageX;
+          velocity = 0;
+          if (rafId) cancelAnimationFrame(rafId);
+          container.style.scrollBehavior = 'auto';
+        },
+        { passive: true }
+      );
+
+      container.addEventListener(
+        'touchmove',
+        e => {
+          const x = e.touches[0].pageX;
+          const walk = (x - touchStartX) * 1;
+          container.scrollLeft -= walk;
+          velocity = walk * 0.05;
+          touchStartX = x;
+          e.preventDefault();
+        },
+        { passive: false }
+      );
+
+      container.addEventListener(
+        'touchend',
+        () => {
+          container.style.scrollBehavior = 'smooth';
+          rafId = requestAnimationFrame(smoothScroll);
+        },
+        { passive: true }
+      );
+
+      // Wheel скролл как бонус
+      container.addEventListener(
+        'wheel',
+        e => {
+          e.preventDefault();
+          const walk = e.deltaY * 0.5;
+          container.scrollLeft += walk;
+          velocity = walk * 0.1;
+          rafId = requestAnimationFrame(smoothScroll);
+        },
+        { passive: false }
+      );
     });
-
-    container.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      e.preventDefault();
-      const walk = (e.pageX - startX) * 0.5;
-      targetScroll = currentScroll - walk;
-      startSmoothScroll();
-    });
-
-    container.addEventListener('mouseup', () => {
-      isDown = false;
-      container.classList.remove('dragging');
-      currentScroll = container.scrollLeft;
-    });
-
-    container.addEventListener('mouseleave', () => {
-      isDown = false;
-      container.classList.remove('dragging');
-      currentScroll = container.scrollLeft;
-      startSmoothScroll();
-    });
-
-    // ===== Touch =====
-    container.addEventListener('touchstart', e => {
-      startX = e.touches[0].pageX;
-      currentScroll = container.scrollLeft;
-      targetScroll = currentScroll;
-      if (rafId) cancelAnimationFrame(rafId);
-    }, { passive: true });
-
-    container.addEventListener('touchmove', e => {
-      const x = e.touches[0].pageX;
-      const walk = (x - startX) * 0.5;
-      targetScroll = currentScroll - walk;
-      startSmoothScroll();
-    }, { passive: false });
-
-    container.addEventListener('touchend', () => {
-      startSmoothScroll();
-    }, { passive: true });
-  });
 });
