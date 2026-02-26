@@ -43,12 +43,8 @@ body {
   background: #fffbf2;
 }
 
-main > section {
-  margin-bottom: 0 !important;
-}
-
-section + section {
-  margin-top: 0 !important;
+section {
+  margin: 20px 0;
 }
 
 .invitation {
@@ -70,6 +66,10 @@ span,
 .note {
   line-height: 1;
 }
+
+h1 {
+  color: #535353;
+}
 /* ==============================
    КОМПАКТНЫЕ отступы для секций
 ============================== */
@@ -80,40 +80,28 @@ span,
 .looks,
 .wishes,
 .final,
-.section,
-.man {
+.section {
   background: #fffbf2;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
-
+.man {
+  background: #fffbf2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+}
 /* ==============================
    Заголовки и тексты — МИНИМАЛЬНЫЕ отступы
 ============================== */
-h1,
-h2,
-.looks-title,
-.wishes-title,
-.final-title {
-  font-size: 25px;
-  color: #535353;
-}
 
-.dress-title {
-  margin-top: -35px;
-}
-
-.schedule-title {
-  margin-top: -35px;
-  font-size: 25px;
-  color: #535353;
-}
 .couple {
   font-size: 100px;
   color: #aea434;
-  line-height: 0.5;
   width: 100%;
   max-width: 900px;
 }
@@ -123,13 +111,15 @@ h2,
   display: block;
   opacity: 0;
   position: relative;
-  line-height: 1;
+  line-height: 0.8;
+  margin: 0;
 }
 
 .name-left {
   text-align: left;
   animation: slideLeft 1s ease-out forwards;
   animation-delay: 0.3s;
+  margin-bottom: -15px;
 }
 
 .name-right {
@@ -166,13 +156,14 @@ h2,
   font-size: 25px;
   color: #535353;
   line-height: 1;
+  margin: 20px 0 0 0;
 }
 
 .date {
   font-size: 38px;
   color: #e26728;
   letter-spacing: 0.05em;
-
+  line-height: 1;
   font-weight: bold;
 }
 
@@ -255,16 +246,18 @@ h2,
 .dance,
 .stars,
 .cherries,
-.angels,
 .final-img {
   width: 80%;
   max-width: 800px;
   display: block;
-  margin: -40px;
+}
+.angels {
+  margin: 0;
+  width: 80%;
+  max-width: 800px;
 }
 .wishes-img {
-  max-width: 450px;
-  margin: -150px;
+  max-width: 250px;
 }
 /* ==============================
    СПЕЦИФИЧНЫЕ стили блоков
@@ -272,30 +265,51 @@ h2,
 .location-text {
   color: #535353;
   font-size: 40px;
+  margin: 20px 0 0 0;
+  line-height: 1;
 }
 .place,
 .address,
 .dress-text,
-.examples-text,
-.wishes-text,
-.final-text,
 .final-accent {
   font-size: 22px;
   color: #535353;
   line-height: 1;
 }
-
+.wishes-text {
+  font-size: 22px;
+  color: #535353;
+  line-height: 1;
+  margin: 10px 0;
+}
+.examples-text {
+  margin: 20px 0 0 0;
+  font-size: 22px;
+  color: #535353;
+  line-height: 1;
+}
+.final-text {
+  font-size: 22px;
+  color: #535353;
+  line-height: 1;
+  margin: 20px 0 0 0;
+}
 .place {
   color: #aea434;
   letter-spacing: 0.1em;
   font-size: 38px;
 }
-
+.schedule-title {
+  margin: 20px 0 0 0;
+  font-size: 30px;
+  color: #535353;
+}
 .dress-title {
   color: #f69593;
   letter-spacing: 0.15em;
   font-weight: bold;
   font-size: 38px;
+  margin: 20px 0 0 0;
 }
 
 .wishes-title {
@@ -304,6 +318,7 @@ h2,
   font-weight: bold;
   font-size: 38px;
   margin-top: 30px;
+  margin: 20px 0 20px 0;
 }
 
 .final-title {
@@ -311,6 +326,7 @@ h2,
   font-weight: bold;
   font-size: 38px;
   margin-top: 30px;
+  margin: 20px 0 0 0;
 }
 
 .timeline {
@@ -321,15 +337,16 @@ h2,
 .time,
 .event {
   display: block;
-  font-size: 30px;
+  font-size: 25px;
   color: #535353;
+  font-weight: bold;
 }
 
 .timeline .highlight .time,
 .timeline .highlight .event {
   color: #8ec1f4;
   font-weight: bold;
-  font-size: 45px;
+  font-size: 25px;
 }
 
 /* Карта — БЕЗ ЛИНИЙ */
@@ -348,7 +365,7 @@ h2,
   position: relative;
   display: flex;
   justify-content: center;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
 }
 
 .palette__window {
@@ -388,10 +405,18 @@ h2,
   height: 100%;
   width: max-content;
   display: flex;
+  margin: 0;
+}
+.palette__image_man {
+  height: 100%;
+  width: max-content;
+  display: flex;
+  margin: 0;
 }
 .palette__shoes {
   height: 80%;
   display: flex;
+  margin: 0;
 }
 .palette__shoes img {
   flex-shrink: 0;
@@ -409,12 +434,12 @@ h2,
 .palette-title {
   font-size: 40px;
   color: #535353;
-  margin-top: 0;
+  margin: 20px 0 0 0;
 }
 .palette-title_man {
   font-size: 40px;
   color: #535353;
-  margin-top: -60px;
+  margin: 0 0 20px 0;
   z-index: 1000;
   position: relative;
 }
@@ -519,8 +544,7 @@ h2,
   .looks,
   .wishes,
   .final,
-  .section,
-  .man {
+  .section {
     padding: 0 15px;
   }
 
@@ -529,20 +553,28 @@ h2,
   p,
   .place,
   .address,
-  .dress-text,
-  .examples-text,
-  .wishes-text,
-  .final-text {
+  .dress-text {
     margin: 0;
   }
-  .location-text {
-    margin-top: -35px;
+  .wishes-text {
+    margin: 10px;
+  }
+  .final-text {
+    font-size: 22px;
+    color: #535353;
+    line-height: 1;
+    margin: 20px 0 0 0;
+  }
+  .examples-text {
+    margin: 20px 0 0 0;
+    font-size: 22px;
+    color: #535353;
+    line-height: 1;
   }
   .hearts,
   .dance,
   .stars,
   .cherries,
-  .angels,
   .final-img {
     width: 80%;
     max-width: 800px;
@@ -550,10 +582,15 @@ h2,
     margin-top: 15px;
     margin-bottom: 0;
   }
+  .angels {
+    margin: 0px;
+    width: 80%;
+    max-width: 800px;
+    display: block;
+  }
 
   .wishes-img {
-    max-width: 250px;
-    margin: -70px;
+    max-width: 150px;
   }
   .final-links {
     flex-direction: column;
