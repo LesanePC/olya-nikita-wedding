@@ -272,24 +272,24 @@ h1 {
 .address,
 .dress-text,
 .final-accent {
-  font-size: 22px;
+  font-size: 25px;
   color: #535353;
   line-height: 1;
 }
 .wishes-text {
-  font-size: 22px;
+  font-size: 25px;
   color: #535353;
   line-height: 1;
   margin: 10px 0;
 }
 .examples-text {
   margin: 20px 0 0 0;
-  font-size: 22px;
+  font-size: 25px;
   color: #535353;
   line-height: 1;
 }
 .final-text {
-  font-size: 22px;
+  font-size: 25px;
   color: #535353;
   line-height: 1;
   margin: 20px 0 0 0;
@@ -301,8 +301,9 @@ h1 {
 }
 .schedule-title {
   margin: 20px 0 0 0;
-  font-size: 30px;
+  font-size: 25px;
   color: #535353;
+  font-weight: bold;
 }
 .dress-title {
   color: #f69593;
@@ -560,14 +561,14 @@ h1 {
     margin: 10px;
   }
   .final-text {
-    font-size: 22px;
+    font-size: 25px;
     color: #535353;
     line-height: 1;
     margin: 20px 0 0 0;
   }
   .examples-text {
     margin: 20px 0 0 0;
-    font-size: 22px;
+    font-size: 25px;
     color: #535353;
     line-height: 1;
   }
